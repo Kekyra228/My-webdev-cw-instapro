@@ -144,7 +144,6 @@ export function getUserPosts(token, userId) {
 }
 
 
-
 export function addLike({ token, id }) {
   return fetch(`${postsHost}/${id}/like`, {
     method: "POST",
