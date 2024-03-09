@@ -1,11 +1,13 @@
+
 import { POSTS_PAGE, USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, getToken, renderApp, setPosts } from "../index.js";
-import { addLike, disLike, getPosts } from "../api.js";
+import { addLike, deletePostFetch, disLike, getPosts, getUserPosts } from "../api.js";
 import { formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
 
-export function renderPostsPageComponent({ appEl }) {
+
+export function userPosts({ appEl }) {
   console.log("Актуальный список постов:", posts);
 
 
@@ -21,12 +23,10 @@ export function renderPostsPageComponent({ appEl }) {
     console.log("имя последнего лайкнувшего", post.likes[post.likes.length - 1]?.name)
 
     return `
-
       <li class="post">
         <div class="post-header" data-user-id=${post.userId}>
             <img src=${post.imageUrlAvatar} class="post-header__user-image">
             <p class="post-header__user-name">${post.name}</p>
-         
         </div>
         <div class="post-image-container">
        
@@ -64,10 +64,9 @@ export function renderPostsPageComponent({ appEl }) {
       </li>`}).join("")
 
 
-
-
   appEl.innerHTML = `<div class="page-container">
   <div class="header-container"></div>
+
   <ul class="posts">${appHtml}</ul> 
   </div>`;
 
@@ -137,24 +136,26 @@ export function renderPostsPageComponent({ appEl }) {
   makeLike()
 
 
-  // const deleteItems = document.querySelectorAll('.delete-btn')
-  // for (const deleteItem of deleteItems) {
-  //   deleteItem.addEventListener("click", () => {
-  //     if (!getToken()) {
-  //       alert("Нужно авторизоваться")
-  //       return
-  //     }
-  //     const id = deleteItem.dataset.id;
-  //     console.log(id)
-  //     deletePostFetch({ token: getToken(), id })
-  //       .then(() => {
-  //         alert("Удалил пост"),
-  //           goToPage(POSTS_PAGE)
+//   const deleteItems = document.querySelectorAll('.delete-btn')
+//   for (const deleteItem of deleteItems) {
+//     deleteItem.addEventListener("click", () => {
+//       if (!getToken()) {
+//         alert("Нужно авторизоваться")
+//         return
+//       }
+//       const id = deleteItem.dataset.id;
+//       console.log(id)
+//       deletePostFetch({ token: getToken(), id })
+//         .then(() => {
+//           alert("Удалил пост"),
+//             goToPage(POSTS_PAGE)
 
-  //       })
+//         })
 
-  //   })
-  // }
+//     })
+//   }
+
+
 
 
 
