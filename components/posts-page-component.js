@@ -3,7 +3,7 @@ import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, getToken, renderApp, setPosts } from "../index.js";
 import { addLike, disLike, getPosts } from "../api.js";
 import { formatDistanceToNow } from "date-fns";
-
+import { ru } from "date-fns/locale";
 
 export function renderPostsPageComponent({ appEl }) {
   console.log("Актуальный список постов:", posts);
@@ -56,7 +56,9 @@ export function renderPostsPageComponent({ appEl }) {
           ${post.description}
         </p>
         <p class="post-date">
-        
+        ${formatDistanceToNow(post.created, new Date(),{
+          locale: ru,
+        })}
         </p>
    
       </li>`}).join("")
@@ -135,23 +137,25 @@ export function renderPostsPageComponent({ appEl }) {
   makeLike()
 
 
-  const deleteItems = document.querySelectorAll('.delete-btn')
-  for (const deleteItem of deleteItems) {
-    deleteItem.addEventListener("click", () => {
-      if (!getToken()) {
-        alert("Нужно авторизоваться")
-        return
-      }
-      const id = deleteItem.dataset.id;
-      console.log(id)
-      deletePostFetch({ token: getToken(), id })
-        .then(() => {
-          alert("Удалил пост"),
-            goToPage(POSTS_PAGE)
+  // const deleteItems = document.querySelectorAll('.delete-btn')
+  // for (const deleteItem of deleteItems) {
+  //   deleteItem.addEventListener("click", () => {
+  //     if (!getToken()) {
+  //       alert("Нужно авторизоваться")
+  //       return
+  //     }
+  //     const id = deleteItem.dataset.id;
+  //     console.log(id)
+  //     deletePostFetch({ token: getToken(), id })
+  //       .then(() => {
+  //         alert("Удалил пост"),
+  //           goToPage(POSTS_PAGE)
 
-        })
+  //       })
 
-    })
-  }
+  //   })
+  // }
+
+
 
 }

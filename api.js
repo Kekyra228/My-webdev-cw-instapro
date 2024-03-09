@@ -38,6 +38,7 @@ export function getPosts({ token }) {
           imageUrlAvatar: post.user.imageUrl,
           name: post.user.name,
           isLiked: post.isLiked,
+          created: post.createdAt
         }
 
       })
@@ -134,7 +135,7 @@ export function getUserPosts(token, userId) {
           likes: post.likes,
           imageUrlAvatar: post.user.imageUrl,
           name: post.user.name,
-
+          created: post.createdAt
         }
 
       })

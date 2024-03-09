@@ -1,13 +1,13 @@
-// import { formatDistanceToNow } from "date-fns";
+
 import { POSTS_PAGE, USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, getToken, renderApp, setPosts } from "../index.js";
 import { addLike, deletePostFetch, disLike, getPosts, getUserPosts } from "../api.js";
-// import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow } from "date-fns";
+import { ru } from "date-fns/locale";
 
 
 export function userPosts({ appEl }) {
-  // TODO: реализовать рендер постов из api
   console.log("Актуальный список постов:", posts);
 
 
@@ -16,7 +16,7 @@ export function userPosts({ appEl }) {
    * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
    */
 
-  // const likes = ["тут будт лайкнувшие"]
+
 
   const appHtml = posts.map((post, index) => {
 
@@ -56,7 +56,9 @@ export function userPosts({ appEl }) {
           ${post.description}
         </p>
         <p class="post-date">
-          ${post.createdAt}
+        ${formatDistanceToNow(post.created, new Date(),{
+          locale: ru,
+        })}
         </p>
    
       </li>`}).join("")
@@ -134,24 +136,24 @@ export function userPosts({ appEl }) {
   makeLike()
 
 
-  const deleteItems = document.querySelectorAll('.delete-btn')
-  for (const deleteItem of deleteItems) {
-    deleteItem.addEventListener("click", () => {
-      if (!getToken()) {
-        alert("Нужно авторизоваться")
-        return
-      }
-      const id = deleteItem.dataset.id;
-      console.log(id)
-      deletePostFetch({ token: getToken(), id })
-        .then(() => {
-          alert("Удалил пост"),
-            goToPage(POSTS_PAGE)
+//   const deleteItems = document.querySelectorAll('.delete-btn')
+//   for (const deleteItem of deleteItems) {
+//     deleteItem.addEventListener("click", () => {
+//       if (!getToken()) {
+//         alert("Нужно авторизоваться")
+//         return
+//       }
+//       const id = deleteItem.dataset.id;
+//       console.log(id)
+//       deletePostFetch({ token: getToken(), id })
+//         .then(() => {
+//           alert("Удалил пост"),
+//             goToPage(POSTS_PAGE)
 
-        })
+//         })
 
-    })
-  }
+//     })
+//   }
 
 
 
