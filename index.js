@@ -16,7 +16,7 @@ import {
   removeUserFromLocalStorage,
   saveUserToLocalStorage,
 } from "./helpers.js";
-// import { userPosts } from "./components/user-posts.js";
+import { userPosts } from "./components/user-posts.js";
 
 
 
@@ -66,9 +66,9 @@ export const goToPage = (newPage, data) => {
 
       return getPosts({ token: getToken() })
         .then((newPosts) => {
-          page = POSTS_PAGE;
-          posts = newPosts;
-          renderApp();
+          page = POSTS_PAGE
+          posts = newPosts
+          renderApp()
         })
         .catch((error) => {
           console.error(error);
@@ -113,8 +113,8 @@ export const renderApp = () => {
       appEl,
       setUser: (newUser) => {
         user = newUser;
-        saveUserToLocalStorage(user);
-        goToPage(POSTS_PAGE);
+        saveUserToLocalStorage(user)
+        goToPage(POSTS_PAGE)
       },
       user,
       goToPage,
@@ -128,8 +128,8 @@ export const renderApp = () => {
 
         posting({ token: getToken(), description, imageUrl })
           .then(() => {
-            console.log("Добавляю пост...", { description, imageUrl });
-            goToPage(POSTS_PAGE);
+            console.log("Добавляю пост...", { description, imageUrl })
+            goToPage(POSTS_PAGE)
 
           })
 
@@ -140,7 +140,7 @@ export const renderApp = () => {
   if (page === POSTS_PAGE) {
     return renderPostsPageComponent({
       appEl,
-    });
+    })
   }
 
   if (page === USER_POSTS_PAGE) {
@@ -148,13 +148,13 @@ export const renderApp = () => {
 
     return userPosts({
       appEl,
-    });
+    })
 
 
   }
-};
+}
 
-goToPage(POSTS_PAGE);
+goToPage(POSTS_PAGE)
 
 
 

@@ -1,11 +1,13 @@
+// import { formatDistanceToNow } from "date-fns";
 import { POSTS_PAGE, USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, getToken, renderApp, setPosts } from "../index.js";
-import { addLike, disLike, getPosts } from "../api.js";
-import { formatDistanceToNow } from "date-fns";
+import { addLike, deletePostFetch, disLike, getPosts, getUserPosts } from "../api.js";
+// import { formatDistanceToNow } from "date-fns";
 
 
-export function renderPostsPageComponent({ appEl }) {
+export function userPosts({ appEl }) {
+  // TODO: реализовать рендер постов из api
   console.log("Актуальный список постов:", posts);
 
 
@@ -14,19 +16,17 @@ export function renderPostsPageComponent({ appEl }) {
    * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
    */
 
-
+  // const likes = ["тут будт лайкнувшие"]
 
   const appHtml = posts.map((post, index) => {
 
     console.log("имя последнего лайкнувшего", post.likes[post.likes.length - 1]?.name)
 
     return `
-
       <li class="post">
         <div class="post-header" data-user-id=${post.userId}>
             <img src=${post.imageUrlAvatar} class="post-header__user-image">
             <p class="post-header__user-name">${post.name}</p>
-         
         </div>
         <div class="post-image-container">
        
@@ -56,16 +56,15 @@ export function renderPostsPageComponent({ appEl }) {
           ${post.description}
         </p>
         <p class="post-date">
-        
+          ${post.createdAt}
         </p>
    
       </li>`}).join("")
 
 
-
-
   appEl.innerHTML = `<div class="page-container">
   <div class="header-container"></div>
+
   <ul class="posts">${appHtml}</ul> 
   </div>`;
 
@@ -153,5 +152,9 @@ export function renderPostsPageComponent({ appEl }) {
 
     })
   }
+
+
+
+
 
 }
