@@ -82,6 +82,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  /* justify-content: space-between; */
 }
 
 .like-button {
@@ -195,4 +196,23 @@
   box-sizing: border-box;
   width: 100%;
   text-align: center;
+}
+
+.container-for-elements{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+margin-top: 10px;
+}
+.delete-btn{
+  box-sizing: border-box;
+  padding: 0;
+  border-radius: 20px;
+  background-color: transparent;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 5px;
 }
